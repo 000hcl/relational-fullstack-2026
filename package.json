@@ -1,0 +1,25 @@
+{
+  "name": "relational-fullstack-2026",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/000hcl/relational-fullstack-2026.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/000hcl/relational-fullstack-2026/issues"
+  },
+  "homepage": "https://github.com/000hcl/relational-fullstack-2026#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.21.0",
+    "sequelize": "^6.37.8"
+  }
+}
