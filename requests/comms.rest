@@ -8,7 +8,7 @@ content-type: application/json
     "likes": 500
 }
 ###
-DELETE http://localhost:3001/api/blogs/5 HTTP/1.1
+DELETE http://localhost:3001/api/blogs/6 HTTP/1.1
 content-type: application/json
 
 ###
@@ -16,5 +16,29 @@ PUT http://localhost:3001/api/blogs/1 HTTP/1.1
 content-type: application/json
 
 {
+    "likes": "f"
+}
+###
+POST http://localhost:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+
+}
+###
+POST http://localhost:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "On the Veg",
+    "author": "Maverick Beeson",
     "likes": 500
 }
+###
+PUT http://localhost:3001/api/blogs/4386934 HTTP/1.1
+content-type: application/json
+
+{
+    "likes": "200"
+}
+###
