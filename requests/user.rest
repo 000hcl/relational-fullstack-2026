@@ -1,0 +1,15 @@
+POST http://localhost:3001/api/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "mbeeson2@beeson.com",
+    "name": "Maverick Beeson",
+    "password": "secret"
+}
+###
+PUT http://localhost:3001/api/users/mbeeson@beeson.com HTTP/1.1
+content-type: application/json
+
+{
+    "newName": "Maverick B. Beeson"
+}
