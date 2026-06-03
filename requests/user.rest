@@ -2,7 +2,7 @@ POST http://localhost:3001/api/users/ HTTP/1.1
 content-type: application/json
 
 {
-    "username": "mbeeson2@beeson.com",
+    "username": "mbeeson@beeson.com",
     "name": "Maverick Beeson",
     "password": "secret"
 }
@@ -12,4 +12,13 @@ content-type: application/json
 
 {
     "newName": "Maverick B. Beeson"
+}
+###
+POST http://localhost:3001/api/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "mbeeson",
+    "name": "Maverick Beeson",
+    "password": "secret"
 }

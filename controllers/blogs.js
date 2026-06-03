@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { errorHandler, blogFinder } = require('../util/middleware')
+const { blogFinder } = require('../util/middleware')
 
 const { Blog } = require('../models')
 
