@@ -1,4 +1,6 @@
 const { Blog } = require('../models')
+const jwt = require('jsonwebtoken')
+const { SECRET } = require('../util/config')
 
 const errorHandler = (error, request, response, next) => {
     if (error.name === 'SequelizeValidationError') {
@@ -19,6 +21,20 @@ const errorHandler = (error, request, response, next) => {
     next(error)
 }
 
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    try {
+      req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
+    } catch{
+      return res.status(401).json({ error: 'token invalid' })
+    }
+  }  else {
+    return res.status(401).json({ error: 'token missing' })
+  }
+  next()
+}
+
 const blogFinder = async (req, res, next) => {
   req.blog = await Blog.findByPk(req.params.id)
   if (!req.blog) {
@@ -27,4 +43,4 @@ const blogFinder = async (req, res, next) => {
   next()
 }
 
-module.exports = { errorHandler, blogFinder }
+module.exports = { errorHandler, blogFinder, tokenExtractor }
