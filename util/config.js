@@ -1,10 +1,10 @@
 require('dotenv').config()
 
-const DATABASE_URL = process.env.TESTING
+let DATABASE_URL = process.env.TESTING
    ? process.env.TEST_DATABASE_URL
   : process.env.DATABASE_URL
 
-//for github actions:
+//for github actions tests:
 DATABASE_URL = DATABASE_URL ? DATABASE_URL : process.env.TEST_DATABASE_URL
 
 module.exports = {
