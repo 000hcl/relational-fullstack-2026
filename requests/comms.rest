@@ -3,10 +3,10 @@ content-type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1iZWVzb25AYmVlc29uLmNvbSIsImlkIjoxLCJpYXQiOjE3ODA3Mzc2NTd9.1L4QwcpfkWah7N-Q66qSlpJPDP3gYCoF3fUz4EHuwnI
 
 {
-    "title": "On the Veg",
+    "title": "On the Veg 3",
     "author": "Maverick Beeson",
     "url": "someurl.url",
-    "likes": 500
+    "likes": 1
 }
 ###
 DELETE http://localhost:3001/api/blogs/1 HTTP/1.1
@@ -38,11 +38,11 @@ content-type: application/json
     "likes": 500
 }
 ###
-PUT http://localhost:3001/api/blogs/4386934 HTTP/1.1
+PUT http://localhost:3001/api/blogs/3 HTTP/1.1
 content-type: application/json
 
 {
-    "likes": "200"
+    "likes": 2000
 }
 ###
 POST http://localhost:3001/api/blogs/ HTTP/1.1
@@ -51,7 +51,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1iZ
 
 {
     "title": "Blessed be the veg",
-    "author": "Maverick Beeson",
+    "author": "John Boysen",
     "url": "someurl.url",
     "likes": 500
 }
