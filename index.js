@@ -13,7 +13,7 @@ const authorRouter = require('./controllers/authors')
 
 app.use(express.json())
 
-app.get('/api', async (req, res) => {
+app.get('/', async (req, res) => {
   res.status(200).end()
 })
 
