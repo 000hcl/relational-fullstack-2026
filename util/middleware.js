@@ -5,7 +5,13 @@ const { SECRET } = require('../util/config')
 const errorHandler = (error, request, response, next) => {
     if (error.name === 'SequelizeValidationError') {
       const errors = error.errors.map(e => e.message)
-      if (String(errors) === 'Validation isEmail on username failed') {
+      if (String(errors).includes('min on year')) {
+        return response.status(400).send({ error: 'Year must be at least 1991' })
+      }
+      else if (String(errors).includes('max on year')) {
+        return response.status(400).send({ error: 'Year must be at most 2026' })
+      }
+      else if (String(errors) === 'Validation isEmail on username failed') {
         return response.status(400).send({ error: 'username must be a valid email address' })
       }
         return response.status(400).send({ error: `invalid values submitted: ${errors}` })

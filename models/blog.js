@@ -29,6 +29,15 @@ Blog.init({
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
+  year: {
+    type: DataTypes.INTEGER,
+    validate: {
+      min: 1991,
+      max: 2026
+    }
+  },
+
+
 }, {
   sequelize,
   underscored: true,
