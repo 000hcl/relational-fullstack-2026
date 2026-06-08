@@ -16,7 +16,18 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  const users = await User.findOne({
+  let where = {}
+  if (String(req.query.read)==='true') {
+    where = {
+      read: true
+    }
+  }
+  if (String(req.query.read)==='false') {
+    where = {
+      read: false
+    }
+  }
+  const user = await User.findOne({
     where: {
       id: req.params.id
     },
@@ -28,11 +39,13 @@ router.get('/:id', async (req, res) => {
       as: 'readings',
       through: {
         attributes: ['read', 'id'],
-        as: 'reading_list'
+        as: 'reading_list',
+        where
       },
+      
     }
   })
-  res.json(users)
+  res.json(user)
 })
 
 router.post('/', async (req, res) => {
