@@ -15,6 +15,25 @@ router.get('/', async (req, res) => {
   res.json(users)
 })
 
+router.get('/:id', async (req, res) => {
+  const users = await User.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: {
+      exclude: ['password']
+    },
+    include: {
+      model: Blog,
+      as: 'readings',
+      through: {
+        attributes: []
+      }
+    }
+  })
+  res.json(users)
+})
+
 router.post('/', async (req, res) => {
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(req.body.password, saltRounds)

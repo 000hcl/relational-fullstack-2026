@@ -24,7 +24,8 @@ router.get('/', async (req, res) => {
       ['likes', 'DESC']
     ],
     include: {
-      model: User
+      model: User,
+      attributes: ['username', 'name']
     },
     where
   })  
