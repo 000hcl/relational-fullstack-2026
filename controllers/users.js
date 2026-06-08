@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
 
-const { User, Blog } = require('../models')
+const { User, Blog, Readinglist } = require('../models')
 
 router.get('/', async (req, res) => {
   const users = await User.findAll({
@@ -27,8 +27,9 @@ router.get('/:id', async (req, res) => {
       model: Blog,
       as: 'readings',
       through: {
-        attributes: []
-      }
+        attributes: ['read', 'id'],
+        as: 'reading_list'
+      },
     }
   })
   res.json(users)
