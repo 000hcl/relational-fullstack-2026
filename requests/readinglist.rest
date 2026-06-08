@@ -5,3 +5,19 @@ content-type: application/json
     "userId": 1,
     "blogId": 2
 }
+###
+POST http://localhost:3001/api/readinglists/ HTTP/1.1
+content-type: application/json
+
+{
+    "userId": 1,
+    "blogId": 20
+}
+###
+POST http://localhost:3001/api/readinglists/ HTTP/1.1
+content-type: application/json
+
+{
+    "userId": 8,
+    "blogId": 2
+}

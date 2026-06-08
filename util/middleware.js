@@ -3,28 +3,37 @@ const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
 
 const errorHandler = (error, request, response, next) => {
-    if (error.name === 'SequelizeValidationError') {
-      const errors = error.errors.map(e => e.message)
-      if (String(errors).includes('min on year')) {
-        return response.status(400).send({ error: 'Year must be at least 1991' })
-      }
-      else if (String(errors).includes('max on year')) {
-        return response.status(400).send({ error: 'Year must be at most 2026' })
-      }
-      else if (String(errors) === 'Validation isEmail on username failed') {
-        return response.status(400).send({ error: 'username must be a valid email address' })
-      }
-        return response.status(400).send({ error: `invalid values submitted: ${errors}` })
-    } else if (error.name === 'SequelizeUniqueConstraintError') {
-      return response.status(400).send({ error: 'Username must be unique.'})
-    }
-    
-    else if (error) {
-        console.log(error.name)
-        return response.status(400).send({ error: `${error}` })
-    }
   
-    next(error)
+  if (error.name === 'SequelizeForeignKeyConstraintError') {
+    if (String(error).includes('readinglists_user_id_fkey')) {
+      return response.status(400).send({ error: 'User does not exist.'})
+    }
+    if (String(error).includes('readinglists_blog_id_fkey')) {
+      return response.status(400).send({ error: 'Blog does not exist.'})
+    }
+  }
+  else if (error.name === 'SequelizeValidationError') {
+    const errors = String(error.errors.map(e => e.message))
+    if (String(errors).includes('min on year')) {
+      return response.status(400).send({ error: 'Year must be at least 1991' })
+    }
+    else if (String(errors).includes('max on year')) {
+      return response.status(400).send({ error: 'Year must be at most 2026' })
+    }
+    else if (String(errors) === 'Validation isEmail on username failed') {
+      return response.status(400).send({ error: 'username must be a valid email address' })
+    }
+      return response.status(400).send({ error: `invalid values submitted: ${errors}` })
+  } else if (error.name === 'SequelizeUniqueConstraintError') {
+    return response.status(400).send({ error: 'Username must be unique.'})
+  }
+  
+  else if (error) {
+      console.log(error.name)
+      return response.status(400).send({ error: `${error}` })
+  }
+
+  next(error)
 }
 
 const tokenExtractor = (req, res, next) => {
