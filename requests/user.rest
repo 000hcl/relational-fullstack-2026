@@ -30,3 +30,6 @@ content-type: application/json
     "username": "mbeeson@beeson.com",
     "password": "secret"
 }
+###
+DELETE http://localhost:3001/api/logout/ HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1iZWVzb25AYmVlc29uLmNvbSIsImlkIjo1OSwiaWF0IjoxNzgxMDE2NDc5fQ.xO-ter527wvNDaZgjFRbg7d6aecXV3jQLKvlGrxWK8g

@@ -11,20 +11,19 @@ content-type: application/json
 
 {
     "userId": 1,
-    "blogId": 20
+    "blogId": 99999
 }
 ###
 POST http://localhost:3001/api/readinglists/ HTTP/1.1
 content-type: application/json
 
 {
-    "userId": 8,
-    "blogId": 2
+
 }
 ###
-PUT http://localhost:3001/api/readinglists/1 HTTP/1.1
+PUT http://localhost:3001/api/readinglists/1000 HTTP/1.1
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1iZWVzb25AYmVlc29uLmNvbSIsImlkIjoxLCJpYXQiOjE3ODA4MzUyMzB9.e9PCPo4_hyxo2fWUvlEgEmSwYYdULKuKN9TQKj9CryQ
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxQGV4YW1wbGUuY29tIiwiaWQiOjcyLCJpYXQiOjE3ODEwMTc2Mzh9.UySsuhbwjjbEtRHp2vOdXu2hpZG-saeYtcqy68kK6M0
 
 {
     "read": true

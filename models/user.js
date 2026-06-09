@@ -26,12 +26,19 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  disabled: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
 
 }, {
   sequelize,
   underscored: true,
   timestamps: true,
-  modelName: 'user'
+  modelName: 'user',
+  createdAt: 'created_at',
+  updatedAt: 'updated_at'
 })
 
 module.exports = User

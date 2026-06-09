@@ -1,6 +1,6 @@
 const express = require('express')
 const { errorHandler } = require('./util/middleware')
-const { Blog, User } = require('./models')
+const { Blog, User, Session, Readinglist } = require('./models')
 const app = express()
 
 const { PORT } = require('./util/config')
@@ -11,6 +11,7 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const authorRouter = require('./controllers/authors')
 const readinglistRouter = require('./controllers/readinglists')
+const logoutRouter = require('./controllers/logout')
 
 app.use(express.json())
 
@@ -21,6 +22,8 @@ app.get('/', async (req, res) => {
 app.post('/api/reset', async (req, res) => {
   await User.destroy({truncate: true, cascade: true})
   await Blog.destroy({truncate: true, cascade: true})
+  await Session.destroy({truncate: true, cascade: true})
+  await Readinglist.destroy({truncate: true, cascade: true})
   res.status(204).end()
 })
 
@@ -29,6 +32,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/authors', authorRouter)
 app.use('/api/readinglists', readinglistRouter)
+app.use('/api/logout', logoutRouter)
 app.use(errorHandler)
 
 

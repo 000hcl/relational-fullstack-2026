@@ -1,4 +1,4 @@
-const { Blog } = require('../models')
+const { Blog, Session, User } = require('../models')
 const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
 
@@ -6,10 +6,10 @@ const errorHandler = (error, request, response, next) => {
   
   if (error.name === 'SequelizeForeignKeyConstraintError') {
     if (String(error).includes('readinglists_user_id_fkey')) {
-      return response.status(400).send({ error: 'User does not exist.'})
+      return response.status(404).send({ error: 'User does not exist.'})
     }
     if (String(error).includes('readinglists_blog_id_fkey')) {
-      return response.status(400).send({ error: 'Blog does not exist.'})
+      return response.status(404).send({ error: 'Blog does not exist.'})
     }
   }
   else if (error.name === 'SequelizeValidationError') {
@@ -28,9 +28,9 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'Username must be unique.'})
   }
   
-  else if (error) {
-      console.log(error.name)
-      return response.status(400).send({ error: `${error}` })
+  else {
+    console.log(error)
+    return response.status(400).send({ error: `${error}` })
   }
 
   next(error)
@@ -58,4 +58,23 @@ const blogFinder = async (req, res, next) => {
   next()
 }
 
-module.exports = { errorHandler, blogFinder, tokenExtractor }
+const authorizeSession = async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken?.id)
+  let tokens = null
+  if (user) {
+    tokens = await Session.findAll({where: {
+      userId: user?.id
+    }})
+  }
+
+  if (!user || user.disabled || tokens.length === 0) {
+    req.authorized = false
+    return res.status(401).json({ error: 'Session invalid or user disabled'})
+  } else {
+    req.authorized = true
+  }
+
+  next()
+}
+
+module.exports = { errorHandler, blogFinder, tokenExtractor, authorizeSession }
